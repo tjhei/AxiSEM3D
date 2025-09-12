@@ -15,6 +15,7 @@
 #pragma clang diagnostic ignored "-Weverything"
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/type_index.hpp>
 #pragma clang diagnostic pop
 
 #include <map>
