@@ -6,16 +6,21 @@
 //  Copyright © 2020 Kuangdai Leng. All rights reserved.
 //
 
-//  setup floating-point environment
+// fenv.cpp
 
 #ifndef _SKIP_DISABLE_SSE_DENORMS
-#include <xmmintrin.h>
+  #if (defined(__i386__) || defined(__x86_64__) || defined(_M_IX86) || defined(_M_X64)) && defined(__SSE__)
+    #include <xmmintrin.h>
+    #define A3D_HAS_FTZ 1
+  #else
+    #define A3D_HAS_FTZ 0
+  #endif
+#else
+  #define A3D_HAS_FTZ 0
 #endif
 
 void fenv_setup() {
-#ifndef _SKIP_DISABLE_SSE_DENORMS
-    // search:
-    // Why does changing 0.1f to 0 slow down performance by 10x?
-    _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
+#if A3D_HAS_FTZ
+  _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
 #endif
 }
