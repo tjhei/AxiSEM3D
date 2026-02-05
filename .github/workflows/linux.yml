@@ -15,11 +15,14 @@ jobs:
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
+          auto-update-conda: true
+          python-version: 3.11
           environment-file: environment.yml
           activate-environment: axisem3d
-          miniforge-variant: Mambaforge
           use-mamba: true
-
+      - name: Conda info
+        shell: bash -el {0}
+        run: conda info
       - name: Configure
         run: |
           source $CONDA/etc/profile.d/conda.sh && conda activate axisem3d
