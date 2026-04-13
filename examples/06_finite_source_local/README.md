@@ -4,33 +4,20 @@
 # Zenodo link: TBA 
 # cd input
 # sh genmesh.sh
+# Before you run the script genmesh.sh, Salvus_Mesh_Lite module is needed
+# pip install https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMeshLite-master.zip
+# pip install "scipy<1.14" "numpy<2.0"
+#
+# AxiSEMCartesian_sfba_m500_2s.e file is made
 
-# to generate source & surface observation locations (already done in the input folders)
-ipython notebook input_setup.ipynb
+# To generate source & surface observation locations (already done in the input folders)
+# ipython notebook input_setup.ipynb
 
-# to run axisem on Archer2 (need to set necessary uppercase variables in submit.slurm)
-cp axisem3d .
-sbatch submit.slurm
+# To run axisem on Archer2 (need to set necessary uppercase variables in submit.slurm)
+# cp axisem3d .
+# sbatch submit.slurm
+# In the local environment, you need to run AxiSEM3D with mpirun instead of sbatch
+# mpirun -np 4 ./axisem3d --input input
 
-# to plot results animation on the surface
-ipython notebook post_processing.ipynb
-
-# Example 00 — Global 1D (PREM)
-# ==============================
-# A global simulation using a 1D PREM (anisotropic) Earth model.
-# Source: 2011 Virginia earthquake (Mw 5.8)
-# Stations: GSN global network + USArray transportable array
-# Period: 50 s
-
-# The mesh has already been generated and is provided in input/.
-# To regenerate it:
-#   python -m salvus_mesh_lite.interface AxiSEM --basic.model prem_ani --basic.period 50 --output_file input/global_mesh__prem_ani__50s.e
-
-# To run the simulation (~4 minutes on 4 cores):
-#   cp path/to/axisem3d .
-#   mpirun -np 4 ./axisem3d input/
-
-# Output will be written to output/ inside this folder.
-
-# Use post_processing.ipynb to visualize seismograms and USArray animations.
-# This notebook is set up for the 1D simulation only.
+# To plot results animation on the surface
+# ipython notebook post_processing.ipynb
